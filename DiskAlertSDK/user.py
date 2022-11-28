@@ -64,14 +64,14 @@ class UserDisk:
 
     def about(self):
         resp = self.host.user.get(
-            path=f'/api/host/{self.host.host_name}/userdisk',
+            path=f'/api/host/@{self.host.host_name}/userdisk/@{self.disk_name}',
         )
         self.disk = resp
         return self
 
     def set_bind(self, bind):
         resp = self.host.user.put(
-            path=f'/api/host/{self.host.host_name}/userdisk',
+            path=f'/api/host/@{self.host.host_name}/userdisk',
             json=dict(bind=bind),
         )
         self.disk = resp
@@ -79,7 +79,7 @@ class UserDisk:
 
     def set_percentage(self, percentage):
         resp = self.host.user.put(
-            path=f'/api/host/{self.host.host_name}/userdisk/percentage',
+            path=f'/api/host/@{self.host.host_name}/userdisk/percentage',
             json=dict(percentage=percentage),
         )
         self.disk = resp
@@ -96,14 +96,14 @@ class UserHost:
 
     def about(self):
         resp = self.user.get(
-            path=f'/api/host/{self.host_name}',
+            path=f'/api/host/@{self.host_name}',
         )
         self.host = resp
         return resp
 
     def get_disks(self):
         resp = self.user.get(
-            path=f'/api/host/{self.host_name}/disk',
+            path=f'/api/host/@{self.host_name}/disk',
         )
         return resp
 
@@ -179,14 +179,14 @@ class User(Entity):
 
     def update_disk_alert_percentage(self, host_name, disk_name, alert_percentage):
         resp = self.put(
-            path=f'/api/host/{host_name}/userdisk/percentage',
+            path=f'/api/host/@{host_name}/userdisk/percentage',
             json=dict(name=disk_name, alert_percentage=alert_percentage),
         )
         return resp
 
     def update_disk_bind(self, host_name, disk_name, bind):
         resp = self.put(
-            path=f'/api/host/{host_name}/userdisk/bind',
+            path=f'/api/host/@{host_name}/userdisk/bind',
             json=dict(name=disk_name, bind=bind),
         )
         return resp

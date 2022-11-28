@@ -25,7 +25,7 @@ class AdminHost(UserHost):
 
     def create(self, internal_ip):
         resp = self.user.post(
-            path=f'/api/host/{self.host_name}',
+            path=f'/api/host/@{self.host_name}',
             json=dict(internal_ip=internal_ip),
         )
         self.host = resp
@@ -33,7 +33,7 @@ class AdminHost(UserHost):
 
     def set_silent(self, silent):
         resp = self.user.put(
-            path=f'/api/host/{self.host_name}',
+            path=f'/api/host/@{self.host_name}',
             json=dict(silent=silent),
         )
         self.host = resp
@@ -41,11 +41,9 @@ class AdminHost(UserHost):
 
     def delete(self):
         resp = self.user.delete(
-            path=f'/api/host/{self.host_name}',
+            path=f'/api/host/@{self.host_name}',
         )
         return resp
-
-
 
 
 class Admin(User):
@@ -70,13 +68,13 @@ class Admin(User):
 
     def get_user(self, user_name):
         resp = self.get(
-            path=f'/api/user/{user_name}',
+            path=f'/api/user/@{user_name}',
         )
         return resp
 
     def delete_user(self, user_name):
         resp = self.delete(
-            path=f'/api/user/{user_name}',
+            path=f'/api/user/@{user_name}',
         )
         return resp
 

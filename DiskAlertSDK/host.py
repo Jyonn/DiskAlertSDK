@@ -13,7 +13,7 @@ class Host(Entity):
 
     def auth(self):
         resp = self.post(
-            path=f'/api/host/{self.name}/auth',
+            path=f'/api/host/@{self.name}/auth',
             json=dict(token=self.token),
             verify=False,
         )
@@ -39,6 +39,6 @@ class Host(Entity):
     def update_usage(self, disk_name, disk_percentage, folders):
         resp = self.post(
             path=f'/api/host/report/disk/memory',
-            json=dict(name=disk_name, disk_percentage=disk_percentage, folders=folders),
+            json=dict(disk_name=disk_name, disk_percentage=disk_percentage, folders=folders),
         )
         return resp
