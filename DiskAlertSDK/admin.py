@@ -29,7 +29,7 @@ class AdminHost(UserHost):
             json=dict(internal_ip=internal_ip),
         )
         self.host = resp
-        return self
+        return resp
 
     def set_silent(self, silent):
         resp = self.user.put(
