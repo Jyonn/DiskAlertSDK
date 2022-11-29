@@ -7,6 +7,9 @@ class Entity:
         self._token = None
         self.verified = False
 
+    def get_property(self, key):
+        raise NotImplementedError
+
     def set_token(self, token):
         self._token = token
         return self

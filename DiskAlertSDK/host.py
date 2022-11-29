@@ -11,6 +11,16 @@ class Host(Entity):
         self.host = None
         self.auth()
 
+    def get_property(self, key):
+        if self.host:
+            return self.host.get(key, None)
+
+    def __str__(self):
+        internal_ip = self.get_property('internal_ip')
+        if internal_ip:
+            return f'<Host {self.name} {internal_ip}>'
+        return f'<Host {self.name}>'
+
     def auth(self):
         resp = self.post(
             path=f'/api/host/@{self.name}/auth',

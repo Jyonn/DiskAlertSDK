@@ -4,7 +4,7 @@ from DiskAlertSDK.user import User, UserHost, UserDisk
 class AdminDisk(UserDisk):
     def set_listen(self, listen):
         resp = self.host.user.put(
-            path=f'/api/host/{self.host.host_name}/disk/{self.disk_name}',
+            path=f'/api/host/@{self.host.host_name}/disk/@{self.disk_name}',
             json=dict(listen=listen),
         )
         self.disk = resp
@@ -12,7 +12,7 @@ class AdminDisk(UserDisk):
 
     def delete(self):
         resp = self.host.user.delete(
-            path=f'/api/host/{self.host.host_name}/disk/{self.disk_name}',
+            path=f'/api/host/@{self.host.host_name}/disk/@{self.disk_name}',
         )
         return resp
 

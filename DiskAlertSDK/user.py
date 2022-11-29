@@ -85,6 +85,9 @@ class UserDisk:
         self.disk = resp
         return self
 
+    def __str__(self):
+        return f'<UserDisk {self.host.user.name}:{self.host.host_name}:{self.disk_name}>'
+
 
 class UserHost:
     def __init__(self, user, host_name):
@@ -107,6 +110,9 @@ class UserHost:
         )
         return resp
 
+    def __str__(self):
+        return f'<UserHost {self.user.name}:{self.host_name}>'
+
 
 class User(Entity):
     def __init__(self, name: str, password: str, connection: Connection):
@@ -128,6 +134,9 @@ class User(Entity):
         if self.user:
             return self.user.get(key, None)
 
+    def __str__(self):
+        return f'<User {self.name}>'
+
     @property
     def is_root(self):
         return self.get_property('root')
@@ -138,7 +147,7 @@ class User(Entity):
 
     def auth(self):
         resp = self.post(
-            path=f'/api/user/{self.name}',
+            path=f'/api/user/@{self.name}',
             json=dict(password=self.password),
             verify=False,
         )
